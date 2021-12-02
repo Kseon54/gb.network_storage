@@ -1,9 +1,6 @@
 package com.geekbrains.chat.client;
 
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
@@ -11,16 +8,16 @@ public class IoNet implements Closeable {
 
     private final Callback callback;
     private final Socket socket;
-    private final InputStream is;
-    private final OutputStream os;
+    private final DataInputStream is;
+    private final DataOutputStream os;
     private final byte[] buf;
 
     public IoNet(Callback callback,
                  Socket socket) throws IOException {
         this.callback = callback;
         this.socket = socket;
-        is = socket.getInputStream();
-        os = socket.getOutputStream();
+        is = new DataInputStream(socket.getInputStream());
+        os = new DataOutputStream(socket.getOutputStream());
         buf = new byte[8192];
         Thread readThread = new Thread(this::readMessages);
         readThread.setDaemon(true);
@@ -32,11 +29,25 @@ public class IoNet implements Closeable {
         os.flush();
     }
 
+    public void writeUtf(String msg) throws IOException {
+        os.writeUTF(msg);
+        os.flush();
+    }
+
+    public void writeLong(long msg) throws IOException {
+        os.writeLong(msg);
+        os.flush();
+    }
+
+    public void writeByte(byte[] msg,int off,int cnt) throws IOException {
+        os.write(msg,off,cnt);
+        os.flush();
+    }
+
     private void readMessages() {
         try {
             while (true) {
-                int read = is.read(buf);
-                String msg = new String(buf, 0, read).trim();
+                String msg = is.readUTF();
                 callback.onReceive(msg);
             }
         } catch (Exception e) {
