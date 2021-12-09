@@ -51,8 +51,4 @@ public class NettyNet {
     public void sendMessage(AbstractMessage message) {
         channel.writeAndFlush(message);
     }
-
-//    public void sendMessage(StringMessage message) {
-//        channel.writeAndFlush(message);
-//    }
 }
