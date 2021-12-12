@@ -11,14 +11,13 @@ import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import lombok.extern.slf4j.Slf4j;
-import main.server.messages.AbstractMessage;
+import main.server.messages.IMessage;
 
 @Slf4j
 public class NettyNet {
 
     private SocketChannel channel;
     private OnMessageReceived callback;
-
 
     public NettyNet(OnMessageReceived callback) {
         this.callback = callback;
@@ -48,7 +47,11 @@ public class NettyNet {
         }).start();
     }
 
-    public void sendMessage(AbstractMessage message) {
+    public void sendMessage(IMessage message) {
         channel.writeAndFlush(message);
+    }
+
+    public void close() {
+        channel.close();
     }
 }

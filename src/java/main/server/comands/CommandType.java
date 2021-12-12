@@ -3,7 +3,10 @@ package main.server.comands;
 import java.util.Arrays;
 
 public enum CommandType {
-    AUTH("auth");
+    AUTH("auth"),
+    MKDIR("mkdir"),
+    RENAME("rename"),
+    TOUCH("touch");
 
     private final String command;
 

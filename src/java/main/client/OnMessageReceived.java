@@ -1,10 +1,10 @@
 package main.client;
 
 
-import main.server.messages.AbstractMessage;
+import main.server.messages.IMessage;
 
 public interface OnMessageReceived {
 
-    void onReceive(AbstractMessage msg);
+    void onReceive(IMessage msg);
 
 }

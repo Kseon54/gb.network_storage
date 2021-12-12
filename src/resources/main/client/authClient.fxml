@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="257.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.client.guiController.AuthClient">
+   <children>
+      <Button layoutX="22.0" layoutY="206.0" mnemonicParsing="false" onAction="#actionLogin" prefHeight="26.0" prefWidth="176.0" text="Войти" />
+      <Label layoutX="83.0" layoutY="32.0" prefHeight="35.0" prefWidth="55.0" text="Логин" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="outputLogin" layoutX="35.0" layoutY="67.0" prefHeight="26.0" prefWidth="150.0" promptText="Логин">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="79.0" layoutY="111.0" prefHeight="35.0" prefWidth="64.0" text="Пароль" textAlignment="CENTER">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="outputPassword" layoutX="35.0" layoutY="147.0" prefHeight="26.0" prefWidth="150.0" promptText="Пароль">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </PasswordField>
+      <Label fx:id="info" layoutX="21.0" layoutY="183.0" prefHeight="18.0" prefWidth="176.0" textFill="RED" />
+   </children>
+</AnchorPane>
