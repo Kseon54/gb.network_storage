@@ -1,12 +1,17 @@
 package main.server.comands;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public enum CommandType {
+public enum CommandType implements Serializable {
     AUTH("auth"),
     MKDIR("mkdir"),
     RENAME("rename"),
-    TOUCH("touch");
+    TOUCH("touch"),
+    DELETE("delete"),
+    DOWNLAND("downland"),
+    UPLAND("upland"),
+    GET_FILES("get_files");
 
     private final String command;
 

@@ -5,8 +5,8 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="257.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.client.guiController.AuthClient">
-   <children>
-      <Button layoutX="22.0" layoutY="206.0" mnemonicParsing="false" onAction="#actionLogin" prefHeight="26.0" prefWidth="176.0" text="Войти" />
+
+      <Button fx:id="loginBtn" layoutX="22.0" layoutY="206.0" mnemonicParsing="false" onAction="#actionLogin" prefHeight="26.0" prefWidth="176.0" text="Войти" />
       <Label layoutX="83.0" layoutY="32.0" prefHeight="35.0" prefWidth="55.0" text="Логин" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman" size="18.0" />
@@ -28,5 +28,5 @@
          </font>
       </PasswordField>
       <Label fx:id="info" layoutX="21.0" layoutY="183.0" prefHeight="18.0" prefWidth="176.0" textFill="RED" />
-   </children>
+
 </AnchorPane>

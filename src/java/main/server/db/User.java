@@ -3,6 +3,7 @@ package main.server.db;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +12,8 @@ import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
-public class User {
-    private static User[] users = new User[]{
+public class User implements Serializable {
+    private transient static User[] users = new User[]{
             new User(1L, "user1", "pass"),
             new User(2L, "user2", "pass")
     };

@@ -29,7 +29,7 @@ public class NettyNet {
                         .group(group)
                         .handler(new ChannelInitializer<SocketChannel>() {
                             @Override
-                            protected void initChannel(SocketChannel ch) throws Exception {
+                            protected void initChannel(SocketChannel ch){
                                 channel = ch;
                                 ch.pipeline().addLast(
                                         new ObjectEncoder(),
@@ -53,5 +53,10 @@ public class NettyNet {
 
     public void close() {
         channel.close();
+        try {
+            channel.closeFuture().sync();
+        } catch (InterruptedException e) {
+            log.error("e=", e);
+        }
     }
 }
