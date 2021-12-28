@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import main.client.ClientApp;
 import main.client.guiController.helperClass.GuiScene;
 import main.server.messages.StringMessage;
@@ -15,7 +17,7 @@ public class AuthClient implements GuiScene {
     public Label info;
     public Button loginBtn;
 
-    public void actionLogin(ActionEvent actionEvent){
+    public void actionLogin(ActionEvent actionEvent) {
         StringMessage message =
                 new StringMessage(
                         String.format("auth %s %s", outputLogin.getText().trim(), outputPassword.getText().trim())
@@ -26,6 +28,13 @@ public class AuthClient implements GuiScene {
     @Override
     public void setInfoText(String text) {
         info.setText(text);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER) {
+            actionLogin(null);
+        }
     }
 
 }

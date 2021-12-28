@@ -1,13 +1,15 @@
 package main.client.guiController;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import main.client.ClientApp;
 import main.client.guiController.helperClass.GuiScene;
 import main.server.comands.CommandType;
-import main.server.messages.FileMessage;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +37,12 @@ public class GuiClient implements GuiScene, Initializable {
     @Override
     public void setInfoText(String text) {
         info.setText(text);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getCode() == KeyCode.DELETE) actionButtonDelete(null);
+        if (e.getCode() == KeyCode.UP) actionButtonUp(null);
     }
 
     public void actionExit(ActionEvent actionEvent) {

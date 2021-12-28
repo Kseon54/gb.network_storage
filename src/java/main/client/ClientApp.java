@@ -2,9 +2,12 @@ package main.client;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.Data;
@@ -19,7 +22,6 @@ import main.server.messages.FileMessage;
 import main.server.messages.IMessage;
 import main.server.messages.ListFilesMessage;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +33,7 @@ import java.util.Optional;
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
 @Data
-public class ClientApp extends Application {
+public class ClientApp extends Application{
 
     private NettyNet net;
     private Stage primaryStage;
@@ -64,6 +66,10 @@ public class ClientApp extends Application {
         primaryStage.setTitle("Network storage");
         primaryStage.setResizable(false);
         primaryStage.setOnCloseRequest(we -> close());
+    }
+
+    private EventHandler<KeyEvent> createEventHandler(){
+        return event -> guiScene.keyPressed(event);
     }
 
 
@@ -99,7 +105,9 @@ public class ClientApp extends Application {
     private void loadScene(String nameScene) throws IOException {
         FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(nameScene)));
         Parent parent = loader.load();
-        Platform.runLater(() -> primaryStage.setScene(new Scene(parent)));
+        Scene scene = new Scene(parent);
+        scene.setOnKeyPressed(createEventHandler());
+        Platform.runLater(() -> primaryStage.setScene(scene));
         guiScene = loader.getController();
     }
 
@@ -189,7 +197,6 @@ public class ClientApp extends Application {
         if (file != null) return Optional.of(file);
         return Optional.empty();
     }
-
 }
 
 
